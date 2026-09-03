@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EslesmeRouteImport } from './routes/eslesme'
 import { Route as GorevlerRouteImport } from './routes/gorevler'
+import { Route as HaritaRouteImport } from './routes/harita'
 import { Route as PanelRouteImport } from './routes/panel'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const GorevlerRoute = GorevlerRouteImport.update({
   path: '/gorevler',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaritaRoute = HaritaRouteImport.update({
+  id: '/harita',
+  path: '/harita',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PanelRoute = PanelRouteImport.update({
   id: '/panel',
   path: '/panel',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/eslesme': typeof EslesmeRoute
   '/gorevler': typeof GorevlerRoute
+  '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/eslesme': typeof EslesmeRoute
   '/gorevler': typeof GorevlerRoute
+  '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/eslesme': typeof EslesmeRoute
   '/gorevler': typeof GorevlerRoute
+  '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/eslesme' | '/gorevler' | '/panel'
+  fullPaths: '/' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/eslesme' | '/gorevler' | '/panel'
-  id: '__root__' | '/' | '/eslesme' | '/gorevler' | '/panel'
+  to: '/' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
+  id: '__root__' | '/' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EslesmeRoute: typeof EslesmeRoute
   GorevlerRoute: typeof GorevlerRoute
+  HaritaRoute: typeof HaritaRoute
   PanelRoute: typeof PanelRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GorevlerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/harita': {
+      id: '/harita'
+      path: '/harita'
+      fullPath: '/harita'
+      preLoaderRoute: typeof HaritaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/panel': {
       id: '/panel'
       path: '/panel'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EslesmeRoute: EslesmeRoute,
   GorevlerRoute: GorevlerRoute,
+  HaritaRoute: HaritaRoute,
   PanelRoute: PanelRoute,
 }
 export const routeTree = rootRouteImport
