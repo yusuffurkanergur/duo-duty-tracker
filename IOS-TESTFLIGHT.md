@@ -5,10 +5,9 @@ Apple imzalama araçları bulunmadığı için native derleme burada yapılamaz.
 
 ## Gereksinimler
 
-- macOS + Xcode 15 veya üzeri (App Store'dan)
+- macOS + Xcode 16 veya üzeri (App Store'dan)
 - Apple Developer Program üyeliği (yıllık 99 USD)
 - Node.js 20+ ve npm (veya bun)
-- CocoaPods: `sudo gem install cocoapods`
 
 ## 1. Depoyu klonla
 
@@ -18,13 +17,13 @@ cd pair-patrol
 npm install     # veya: bun install
 ```
 
-## 2. iOS platformunu ekle
+## 2. iOS projesini eşitle
 
-Capacitor yapılandırması (`capacitor.config.ts`) hazır. Bir kez şunu çalıştır:
+Capacitor yapılandırması (`capacitor.config.ts`) ve native `ios/` projesi hazırdır.
+Web veya yapılandırma değişikliklerinden sonra şunu çalıştır:
 
 ```bash
-npx cap add ios
-npx cap sync ios
+npm run ios:sync
 ```
 
 > Not: Yapılandırma, native kabuğun yayınlanan web uygulamasını
@@ -34,7 +33,7 @@ npx cap sync ios
 ## 3. Xcode'da aç ve imzala
 
 ```bash
-npx cap open ios
+npm run ios:open
 ```
 
 Xcode içinde:
@@ -74,7 +73,7 @@ Bir iPhone'u bağla, Xcode'da hedef cihaz olarak seç ve **Run** (⌘R).
 
 | Sorun | Çözüm |
 | --- | --- |
-| `pod install` hatası | `cd ios/App && pod repo update && pod install` |
+| Swift Package hatası | Xcode → File → Packages → Reset Package Caches |
 | Beyaz ekran | `capacitor.config.ts` içindeki `server.url` erişilebilir mi kontrol et |
 | İmzalama hatası | Xcode → Settings → Accounts'ta Apple ID ekli mi bak |
 | Konum çalışmıyor | Info.plist'te `NSLocationWhenInUseUsageDescription` var mı kontrol et |

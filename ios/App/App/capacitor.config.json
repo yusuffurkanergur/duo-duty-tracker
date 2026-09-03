@@ -1,0 +1,14 @@
+{
+	"appId": "app.lovable.pairpatrol",
+	"appName": "Pair Patrol",
+	"webDir": "public",
+	"server": {
+		"url": "https://duo-duty-tracker.lovable.app",
+		"cleartext": false
+	},
+	"ios": {
+		"contentInset": "always",
+		"backgroundColor": "#FDF6EC"
+	},
+	"packageClassList": []
+}
