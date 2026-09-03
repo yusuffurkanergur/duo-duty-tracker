@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EslesmeRouteImport } from './routes/eslesme'
+import { Route as GorevlerRouteImport } from './routes/gorevler'
 import { Route as PanelRouteImport } from './routes/panel'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const EslesmeRoute = EslesmeRouteImport.update({
   path: '/eslesme',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GorevlerRoute = GorevlerRouteImport.update({
+  id: '/gorevler',
+  path: '/gorevler',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PanelRoute = PanelRouteImport.update({
   id: '/panel',
   path: '/panel',
@@ -32,30 +38,34 @@ const PanelRoute = PanelRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/eslesme': typeof EslesmeRoute
+  '/gorevler': typeof GorevlerRoute
   '/panel': typeof PanelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/eslesme': typeof EslesmeRoute
+  '/gorevler': typeof GorevlerRoute
   '/panel': typeof PanelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/eslesme': typeof EslesmeRoute
+  '/gorevler': typeof GorevlerRoute
   '/panel': typeof PanelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/eslesme' | '/panel'
+  fullPaths: '/' | '/eslesme' | '/gorevler' | '/panel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/eslesme' | '/panel'
-  id: '__root__' | '/' | '/eslesme' | '/panel'
+  to: '/' | '/eslesme' | '/gorevler' | '/panel'
+  id: '__root__' | '/' | '/eslesme' | '/gorevler' | '/panel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EslesmeRoute: typeof EslesmeRoute
+  GorevlerRoute: typeof GorevlerRoute
   PanelRoute: typeof PanelRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EslesmeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gorevler': {
+      id: '/gorevler'
+      path: '/gorevler'
+      fullPath: '/gorevler'
+      preLoaderRoute: typeof GorevlerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/panel': {
       id: '/panel'
       path: '/panel'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EslesmeRoute: EslesmeRoute,
+  GorevlerRoute: GorevlerRoute,
   PanelRoute: PanelRoute,
 }
 export const routeTree = rootRouteImport
