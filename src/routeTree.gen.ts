@@ -16,6 +16,7 @@ import { Route as EslesmeRouteImport } from './routes/eslesme'
 import { Route as GorevlerRouteImport } from './routes/gorevler'
 import { Route as HaritaRouteImport } from './routes/harita'
 import { Route as PanelRouteImport } from './routes/panel'
+import { Route as ProfilRouteImport } from './routes/profil'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const PanelRoute = PanelRouteImport.update({
   path: '/panel',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfilRoute = ProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
+  '/profil': typeof ProfilRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
+  '/profil': typeof ProfilRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
+  '/profil': typeof ProfilRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/gorevler'
     | '/harita'
     | '/panel'
+    | '/profil'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/gorevler'
     | '/harita'
     | '/panel'
+    | '/profil'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/gorevler'
     | '/harita'
     | '/panel'
+    | '/profil'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   GorevlerRoute: typeof GorevlerRoute
   HaritaRoute: typeof HaritaRoute
   PanelRoute: typeof PanelRoute
+  ProfilRoute: typeof ProfilRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PanelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profil': {
+      id: '/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof ProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   GorevlerRoute: GorevlerRoute,
   HaritaRoute: HaritaRoute,
   PanelRoute: PanelRoute,
+  ProfilRoute: ProfilRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
