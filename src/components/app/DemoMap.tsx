@@ -95,7 +95,7 @@ export function DemoMap({
       <rect width={size} height={size} fill="url(#pp-grid)" opacity="0.7" />
 
       {/* stilize yollar ve park */}
-      <g className="text-border" stroke="currentColor" strokeLinecap="round">
+      <g className="text-border" fill="none" stroke="currentColor" strokeLinecap="round">
         <path d="M0 640 H1000" strokeWidth="26" opacity="0.55" />
         <path d="M380 0 V1000" strokeWidth="20" opacity="0.5" />
         <path d="M0 220 H620 L1000 420" strokeWidth="14" opacity="0.4" />
