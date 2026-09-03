@@ -261,7 +261,7 @@ function ZoneDialog({
               min={50}
               max={1000}
               step={25}
-              onValueChange={([v]) => setRadius(v)}
+              onValueChange={(v) => setRadius(v[0] ?? radius)}
               className="mt-3"
             />
           </div>

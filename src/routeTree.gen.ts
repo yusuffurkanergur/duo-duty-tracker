@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BolgelerRouteImport } from './routes/bolgeler'
 import { Route as EslesmeRouteImport } from './routes/eslesme'
 import { Route as GorevlerRouteImport } from './routes/gorevler'
 import { Route as HaritaRouteImport } from './routes/harita'
@@ -18,6 +19,11 @@ import { Route as PanelRouteImport } from './routes/panel'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BolgelerRoute = BolgelerRouteImport.update({
+  id: '/bolgeler',
+  path: '/bolgeler',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EslesmeRoute = EslesmeRouteImport.update({
@@ -43,6 +49,7 @@ const PanelRoute = PanelRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bolgeler': typeof BolgelerRoute
   '/eslesme': typeof EslesmeRoute
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bolgeler': typeof BolgelerRoute
   '/eslesme': typeof EslesmeRoute
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bolgeler': typeof BolgelerRoute
   '/eslesme': typeof EslesmeRoute
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
@@ -65,14 +74,22 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
+  fullPaths: '/' | '/bolgeler' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
-  id: '__root__' | '/' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
+  to: '/' | '/bolgeler' | '/eslesme' | '/gorevler' | '/harita' | '/panel'
+  id:
+    | '__root__'
+    | '/'
+    | '/bolgeler'
+    | '/eslesme'
+    | '/gorevler'
+    | '/harita'
+    | '/panel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BolgelerRoute: typeof BolgelerRoute
   EslesmeRoute: typeof EslesmeRoute
   GorevlerRoute: typeof GorevlerRoute
   HaritaRoute: typeof HaritaRoute
@@ -86,6 +103,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bolgeler': {
+      id: '/bolgeler'
+      path: '/bolgeler'
+      fullPath: '/bolgeler'
+      preLoaderRoute: typeof BolgelerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/eslesme': {
@@ -121,6 +145,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BolgelerRoute: BolgelerRoute,
   EslesmeRoute: EslesmeRoute,
   GorevlerRoute: GorevlerRoute,
   HaritaRoute: HaritaRoute,
