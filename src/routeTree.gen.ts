@@ -13,10 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AktiviteRouteImport } from './routes/aktivite'
 import { Route as BolgelerRouteImport } from './routes/bolgeler'
 import { Route as EslesmeRouteImport } from './routes/eslesme'
+import { Route as GizlilikRouteImport } from './routes/gizlilik'
 import { Route as GorevlerRouteImport } from './routes/gorevler'
 import { Route as HaritaRouteImport } from './routes/harita'
 import { Route as PanelRouteImport } from './routes/panel'
 import { Route as ProfilRouteImport } from './routes/profil'
+import { Route as ProfilOlusturRouteImport } from './routes/profil-olustur'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,6 +38,11 @@ const BolgelerRoute = BolgelerRouteImport.update({
 const EslesmeRoute = EslesmeRouteImport.update({
   id: '/eslesme',
   path: '/eslesme',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GizlilikRoute = GizlilikRouteImport.update({
+  id: '/gizlilik',
+  path: '/gizlilik',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GorevlerRoute = GorevlerRouteImport.update({
@@ -58,26 +65,35 @@ const ProfilRoute = ProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfilOlusturRoute = ProfilOlusturRouteImport.update({
+  id: '/profil-olustur',
+  path: '/profil-olustur',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aktivite': typeof AktiviteRoute
   '/bolgeler': typeof BolgelerRoute
   '/eslesme': typeof EslesmeRoute
+  '/gizlilik': typeof GizlilikRoute
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
   '/profil': typeof ProfilRoute
+  '/profil-olustur': typeof ProfilOlusturRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aktivite': typeof AktiviteRoute
   '/bolgeler': typeof BolgelerRoute
   '/eslesme': typeof EslesmeRoute
+  '/gizlilik': typeof GizlilikRoute
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
   '/profil': typeof ProfilRoute
+  '/profil-olustur': typeof ProfilOlusturRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,10 +101,12 @@ export interface FileRoutesById {
   '/aktivite': typeof AktiviteRoute
   '/bolgeler': typeof BolgelerRoute
   '/eslesme': typeof EslesmeRoute
+  '/gizlilik': typeof GizlilikRoute
   '/gorevler': typeof GorevlerRoute
   '/harita': typeof HaritaRoute
   '/panel': typeof PanelRoute
   '/profil': typeof ProfilRoute
+  '/profil-olustur': typeof ProfilOlusturRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,30 +115,36 @@ export interface FileRouteTypes {
     | '/aktivite'
     | '/bolgeler'
     | '/eslesme'
+    | '/gizlilik'
     | '/gorevler'
     | '/harita'
     | '/panel'
     | '/profil'
+    | '/profil-olustur'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/aktivite'
     | '/bolgeler'
     | '/eslesme'
+    | '/gizlilik'
     | '/gorevler'
     | '/harita'
     | '/panel'
     | '/profil'
+    | '/profil-olustur'
   id:
     | '__root__'
     | '/'
     | '/aktivite'
     | '/bolgeler'
     | '/eslesme'
+    | '/gizlilik'
     | '/gorevler'
     | '/harita'
     | '/panel'
     | '/profil'
+    | '/profil-olustur'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -128,10 +152,12 @@ export interface RootRouteChildren {
   AktiviteRoute: typeof AktiviteRoute
   BolgelerRoute: typeof BolgelerRoute
   EslesmeRoute: typeof EslesmeRoute
+  GizlilikRoute: typeof GizlilikRoute
   GorevlerRoute: typeof GorevlerRoute
   HaritaRoute: typeof HaritaRoute
   PanelRoute: typeof PanelRoute
   ProfilRoute: typeof ProfilRoute
+  ProfilOlusturRoute: typeof ProfilOlusturRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -164,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EslesmeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gizlilik': {
+      id: '/gizlilik'
+      path: '/gizlilik'
+      fullPath: '/gizlilik'
+      preLoaderRoute: typeof GizlilikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gorevler': {
       id: '/gorevler'
       path: '/gorevler'
@@ -192,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfilRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profil-olustur': {
+      id: '/profil-olustur'
+      path: '/profil-olustur'
+      fullPath: '/profil-olustur'
+      preLoaderRoute: typeof ProfilOlusturRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -200,10 +240,12 @@ const rootRouteChildren: RootRouteChildren = {
   AktiviteRoute: AktiviteRoute,
   BolgelerRoute: BolgelerRoute,
   EslesmeRoute: EslesmeRoute,
+  GizlilikRoute: GizlilikRoute,
   GorevlerRoute: GorevlerRoute,
   HaritaRoute: HaritaRoute,
   PanelRoute: PanelRoute,
   ProfilRoute: ProfilRoute,
+  ProfilOlusturRoute: ProfilOlusturRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

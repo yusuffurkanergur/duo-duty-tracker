@@ -62,8 +62,8 @@ function Landing() {
             <span className="block text-primary">Birlikte, eğlenceli</span>
           </h1>
           <p className="mx-auto mt-4 max-w-md text-balance text-[15px] leading-relaxed text-muted-foreground">
-            Görev gönder, birlikte gülün, konumu yalnızca ikiniz de isterse paylaşın.
-            Kavga değil, oyun.
+            Görev gönder, birlikte gülün, konumu yalnızca ikiniz de isterse paylaşın. Kavga değil,
+            oyun.
           </p>
         </motion.header>
 
@@ -90,7 +90,9 @@ function Landing() {
               size="lg"
               className="tactile h-14 flex-1 rounded-2xl text-base font-bold"
             >
-              <Link to="/eslesme">Giriş / Eşleş</Link>
+              <Link to={state.onboarded ? "/eslesme" : "/profil-olustur"}>
+                {state.onboarded ? "Eşleşmeye devam et" : "Profilini oluştur"}
+              </Link>
             </Button>
             <Button
               size="lg"
@@ -112,9 +114,12 @@ function Landing() {
               </Link>
             </p>
           ) : (
-            <p className="mt-4 text-center text-xs text-muted-foreground">
-              Demo veriler cihazında kalır, hiçbir yere gönderilmez.
-            </p>
+            <div className="mt-4 space-y-2 text-center text-xs text-muted-foreground">
+              <p>Demo veriler cihazında kalır, hiçbir yere gönderilmez.</p>
+              <Link to="/gizlilik" className="font-semibold underline">
+                Gizlilik ve veri kullanımı
+              </Link>
+            </div>
           )}
         </div>
       </div>

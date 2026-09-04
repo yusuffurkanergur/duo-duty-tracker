@@ -20,13 +20,26 @@ export function Gate({ children }: { children: React.ReactNode }) {
   }
 
   if (!state.paired) {
+    if (!state.onboarded) {
+      return (
+        <div className="surface p-6 text-center">
+          <HeartHandshake className="mx-auto h-10 w-10 text-primary" aria-hidden="true" />
+          <h2 className="mt-3 font-display text-xl font-bold">Önce seni tanıyalım</h2>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
+            Eşleşme kodundan önce adını ve profil simgeni seç.
+          </p>
+          <Button asChild className="mt-5 rounded-xl">
+            <Link to="/profil-olustur">Profilini oluştur</Link>
+          </Button>
+        </div>
+      );
+    }
     return (
       <div className="surface p-6 text-center">
         <HeartHandshake className="mx-auto h-10 w-10 text-primary" aria-hidden="true" />
         <h2 className="mt-3 font-display text-xl font-bold">Önce eşleşmelisiniz</h2>
         <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-          Pair Patrol iki kişilik bir oyun. Davet kodunu paylaş ya da partnerinin
-          kodunu gir.
+          Pair Patrol iki kişilik bir oyun. Davet kodunu paylaş ya da partnerinin kodunu gir.
         </p>
         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-center">
           <Button asChild className="rounded-xl">

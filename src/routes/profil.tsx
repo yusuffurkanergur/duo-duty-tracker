@@ -1,13 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import {
-  Bell,
-  LogOut,
-  MapPin,
-  Moon,
-  Shield,
-  Smile,
-  Unlink,
-} from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Bell, LogOut, MapPin, Moon, Shield, Smile, Unlink } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/app/AppShell";
 import { Button } from "@/components/ui/button";
@@ -69,11 +61,12 @@ function ProfilePage() {
             <div className="min-w-0">
               <p className="font-display text-lg font-bold">{state.me.name}</p>
               <p className="text-sm text-muted-foreground">
-                {state.paired
-                  ? `${state.partner.name} ile eşleşti`
-                  : "Henüz eşleşmedin"}
+                {state.paired ? `${state.partner.name} ile eşleşti` : "Henüz eşleşmedin"}
               </p>
             </div>
+            <Button asChild size="sm" variant="outline" className="ml-auto rounded-xl">
+              <Link to="/profil-olustur">Düzenle</Link>
+            </Button>
           </section>
 
           <section className="surface divide-y divide-border p-2" aria-label="Ayarlar">
@@ -98,9 +91,7 @@ function ProfilePage() {
                   checked={state.me.sharing}
                   onCheckedChange={(v) => {
                     setSharing("me", v);
-                    toast[v ? "success" : "message"](
-                      v ? "Paylaşım açık" : "Paylaşımı durdurdun",
-                    );
+                    toast[v ? "success" : "message"](v ? "Paylaşım açık" : "Paylaşımı durdurdun");
                   }}
                   aria-label="Konum paylaşımı"
                 />
@@ -117,12 +108,7 @@ function ProfilePage() {
                     : "Henüz sorulmadı"
               }
               control={
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="rounded-xl"
-                  onClick={askLocation}
-                >
+                <Button size="sm" variant="outline" className="rounded-xl" onClick={askLocation}>
                   İzin iste
                 </Button>
               }
@@ -156,10 +142,12 @@ function ProfilePage() {
           <section className="surface p-5">
             <h2 className="font-display text-base font-bold">Gizlilik</h2>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-              Pair Patrol gizli takip yapmaz. Konumun yalnızca sen açtığında ve
-              partnerin de paylaşımı açıkken görünür. Tüm demo verilerin bu cihazda
-              saklanır.
+              Pair Patrol gizli takip yapmaz. Konumun yalnızca sen açtığında ve partnerin de
+              paylaşımı açıkken görünür. Tüm demo verilerin bu cihazda saklanır.
             </p>
+            <Button asChild variant="link" className="mt-2 h-auto p-0 text-sm">
+              <Link to="/gizlilik">Gizlilik metnini oku</Link>
+            </Button>
           </section>
 
           <div className="space-y-2">

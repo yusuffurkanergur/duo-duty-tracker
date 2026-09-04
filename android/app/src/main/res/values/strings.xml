@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pair Patrol</string>
+    <string name="title_activity_main">Pair Patrol</string>
+    <string name="package_name">app.lovable.pairpatrol</string>
+    <string name="custom_url_scheme">app.lovable.pairpatrol</string>
+</resources>

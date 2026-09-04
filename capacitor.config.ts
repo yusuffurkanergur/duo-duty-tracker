@@ -1,4 +1,4 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 /**
  * Pair Patrol — iOS (Capacitor) yapılandırması.
@@ -8,16 +8,20 @@ import type { CapacitorConfig } from '@capacitor/cli';
  * Tamamen offline bir paket istenirse statik export gerekir.
  */
 const config: CapacitorConfig = {
-  appId: 'app.lovable.pairpatrol',
-  appName: 'Pair Patrol',
-  webDir: 'public',
+  appId: "app.lovable.pairpatrol",
+  appName: "Pair Patrol",
+  webDir: "public",
   server: {
-    url: 'https://duo-duty-tracker.lovable.app',
+    url: "https://duo-duty-tracker.lovable.app",
     cleartext: false,
   },
   ios: {
-    contentInset: 'always',
-    backgroundColor: '#FDF6EC',
+    contentInset: "always",
+    backgroundColor: "#FDF6EC",
+  },
+  android: {
+    backgroundColor: "#FDF6EC",
+    allowMixedContent: false,
   },
 };
 

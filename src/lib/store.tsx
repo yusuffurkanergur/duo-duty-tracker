@@ -56,6 +56,7 @@ type Ctx = {
   hydrated: boolean;
   update: (fn: (s: AppState) => AppState) => void;
   startDemo: () => void;
+  createProfile: (name: string, emoji: string) => void;
   reset: () => void;
   regenerateCode: () => void;
   pairWithCode: (code: string) => { ok: boolean; message: string };
@@ -113,12 +114,21 @@ export function PairPatrolProvider({ children }: { children: React.ReactNode }) 
       hydrated,
       update,
       startDemo: () => setState(demoState()),
+      createProfile: (name, emoji) =>
+        update((s) => ({
+          ...s,
+          onboarded: true,
+          me: {
+            ...s.me,
+            name: name.trim(),
+            emoji,
+          },
+        })),
       reset: () => {
         storage.clear();
         setState(initialState());
       },
-      regenerateCode: () =>
-        update((s) => ({ ...s, inviteCode: makeInviteCode() })),
+      regenerateCode: () => update((s) => ({ ...s, inviteCode: makeInviteCode() })),
       pairWithCode: (code) => {
         const clean = code.trim().toUpperCase();
         if (clean.length < 4) {
@@ -167,8 +177,7 @@ export function PairPatrolProvider({ children }: { children: React.ReactNode }) 
         }));
         return elapsed;
       },
-      removeTask: (id) =>
-        update((s) => ({ ...s, tasks: s.tasks.filter((t) => t.id !== id) })),
+      removeTask: (id) => update((s) => ({ ...s, tasks: s.tasks.filter((t) => t.id !== id) })),
       addZone: (input) => {
         const zone: Zone = {
           id: uid(),
@@ -187,21 +196,16 @@ export function PairPatrolProvider({ children }: { children: React.ReactNode }) 
           ...s,
           zones: s.zones.map((z) => (z.id === id ? { ...z, active: !z.active } : z)),
         })),
-      removeZone: (id) =>
-        update((s) => ({ ...s, zones: s.zones.filter((z) => z.id !== id) })),
-      setSharing: (who, val) =>
-        update((s) => ({ ...s, [who]: { ...s[who], sharing: val } })),
-      setSettings: (patch) =>
-        update((s) => ({ ...s, settings: { ...s.settings, ...patch } })),
+      removeZone: (id) => update((s) => ({ ...s, zones: s.zones.filter((z) => z.id !== id) })),
+      setSharing: (who, val) => update((s) => ({ ...s, [who]: { ...s[who], sharing: val } })),
+      setSettings: (patch) => update((s) => ({ ...s, settings: { ...s.settings, ...patch } })),
       pushAlert: (alert) => update((s) => pushAlertInto(s, alert)),
       markAlertsRead: () =>
         update((s) => ({ ...s, alerts: s.alerts.map((a) => ({ ...a, read: true })) })),
     };
   }, [state, hydrated, update]);
 
-  return (
-    <PairPatrolContext.Provider value={value}>{children}</PairPatrolContext.Provider>
-  );
+  return <PairPatrolContext.Provider value={value}>{children}</PairPatrolContext.Provider>;
 }
 
 export function usePairPatrol(): Ctx {
